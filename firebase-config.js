@@ -1,5 +1,5 @@
 export const firebaseConfig = {
-  apiKey: "AIzaSyDQTm3WKv4SCO7MmF5ThbxjI4V1KuwgbyM",
+  apiKey: "AIzaSyDQTsmWKv4SCQ7MmF5Ihbxjl4V1KuwgbyM",
   authDomain: "learn-too-earn.firebaseapp.com",
   projectId: "learn-too-earn",
   storageBucket: "learn-too-earn.firebasestorage.app",
