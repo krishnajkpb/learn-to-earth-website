@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join - Learn to Earth</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="auth-page">
+  <div class="auth-card">
+    <a class="back" href="index.html">← Learn to Earth</a>
+    <div class="brand center"><span class="logo">L</span> Learn to Earth</div>
+    <h1>Join Learn to Earth</h1>
+    <p class="muted">Create your learner request.</p>
+    <form id="signupForm">
+      <label>Full name<input id="name" required placeholder="Your name"></label>
+      <label>Email<input id="email" type="email" required placeholder="you@example.com"></label>
+      <label>Password<input id="password" type="password" minlength="4" required placeholder="Create a password"></label>
+      <button class="button primary full">Sign up</button>
+    </form>
+    <div id="signupMessage" class="message hidden"></div>
+    <p class="small">Already registered? <a href="login.html">Log in</a></p>
+  </div>
+</div>
+<script type="module" src="script.js"></script>
+</body>
+</html>

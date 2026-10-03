@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - Learn to Earth</title><link rel="stylesheet" href="style.css"></head>
+<body><header class="topbar"><div class="brand"><span class="logo">L</span> Learn to Earth <span class="admin-tag">ADMIN</span></div><nav><a href="index.html">Website</a><button id="adminLogout" class="link-button">Logout</button></nav></header>
+<main class="content admin-page">
+<div id="adminLoginBox" class="auth-card admin-login"><h1>Admin Login</h1><p class="muted">Manage Learn to Earth.</p>
+<form id="adminLoginForm"><label>Admin ID<input id="adminId" required></label><label>Password<input id="adminPassword" type="password" required></label><button class="button primary full">Sign in</button></form><div id="adminMessage" class="message hidden"></div></div>
+<div id="adminPanel" class="hidden"><div class="page-heading"><span class="pill">ADMIN PANEL</span><h1>Manage your library</h1></div>
+<div class="admin-grid">
+<section class="panel"><h2>Create folder</h2><p class="muted">Create Mathematics, Science, English, etc.</p><form id="folderForm"><label>Folder name<input id="folderName" required placeholder="e.g. Mathematics"></label><button class="button primary">Add folder</button></form></section>
+<section class="panel"><h2>Folders</h2><div id="foldersList"></div></section></div>
+<div class="admin-grid">
+<section class="panel"><h2>Add video lesson</h2><p class="muted">Use a direct MP4/WebM URL or a Google Drive MP4 link.</p><form id="videoForm"><label>Title<input id="videoTitle" required placeholder="e.g. Introduction to Algebra"></label><label>Folder<select id="videoFolder" required></select></label><label>Video URL<input id="videoUrl" required placeholder="https://.../lesson.mp4 or Google Drive link"></label><button class="button primary">Add video</button></form></section>
+<section class="panel"><h2>Add study material</h2><form id="docForm"><label>Title<input id="docTitle" required placeholder="e.g. Algebra Notes"></label><label>Folder<select id="docFolder" required></select></label><label>File URL<input id="docUrl" required placeholder="https://..."></label><button class="button primary">Add material</button></form></section></div>
+<section class="panel"><h2>Current content</h2><div id="adminContent"></div></section>
+<section class="panel"><h2>Learner requests</h2><div id="usersList"></div></section>
+<div class="admin-warning">GitHub Pages is static hosting. This demo stores accounts/content in each browser's localStorage, so it is not secure authentication and changes are not shared between different browsers/devices.</div>
+</div></main><script type="module" src="script.js"></script></body></html>
