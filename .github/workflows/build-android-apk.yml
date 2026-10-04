@@ -1,0 +1,185 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download project
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Android project
+        run: |
+          mkdir -p app/src/main/java/com/learn/toearth
+          mkdir -p app/src/main/res/layout
+          mkdir -p app/src/main/res/values
+
+          cat > settings.gradle <<'EOF'
+          pluginManagement {
+              repositories {
+                  google()
+                  mavenCentral()
+                  gradlePluginPortal()
+              }
+          }
+
+          dependencyResolutionManagement {
+              repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+              repositories {
+                  google()
+                  mavenCentral()
+              }
+          }
+
+          rootProject.name = "LearnToEarthApp"
+          include(":app")
+          EOF
+
+          cat > build.gradle <<'EOF'
+          plugins {
+              id 'com.android.application' version '8.7.3' apply false
+          }
+          EOF
+
+          cat > app/build.gradle <<'EOF'
+          plugins {
+              id 'com.android.application'
+          }
+
+          android {
+              namespace 'com.learn.toearth'
+              compileSdk 35
+
+              defaultConfig {
+                  applicationId 'com.learn.toearth'
+                  minSdk 23
+                  targetSdk 35
+                  versionCode 1
+                  versionName '1.0'
+              }
+          }
+
+          dependencies {
+              implementation 'androidx.appcompat:appcompat:1.7.0'
+              implementation 'androidx.activity:activity:1.10.1'
+          }
+          EOF
+
+          cat > app/src/main/AndroidManifest.xml <<'EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+              <uses-permission android:name="android.permission.INTERNET" />
+
+              <application
+                  android:theme="@style/AppTheme"
+                  android:label="Learn to Earth"
+                  android:usesCleartextTraffic="false">
+
+                  <activity
+                      android:name=".MainActivity"
+                      android:exported="true">
+
+                      <intent-filter>
+                          <action android:name="android.intent.action.MAIN" />
+                          <category android:name="android.intent.category.LAUNCHER" />
+                      </intent-filter>
+
+                  </activity>
+              </application>
+          </manifest>
+          EOF
+
+          cat > app/src/main/res/values/styles.xml <<'EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <resources>
+              <style name="AppTheme" parent="android:style/Theme.Material.Light.NoActionBar">
+                  <item name="android:fontFamily">sans</item>
+                  <item name="android:colorAccent">#1976D2</item>
+              </style>
+          </resources>
+          EOF
+
+          cat > app/src/main/res/layout/activity_main.xml <<'EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <WebView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/webView"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" />
+          EOF
+
+          cat > app/src/main/java/com/learn/toearth/MainActivity.java <<'EOF'
+          package com.learn.toearth;
+
+          import android.os.Bundle;
+          import android.webkit.CookieManager;
+          import android.webkit.WebSettings;
+          import android.webkit.WebView;
+          import android.webkit.WebViewClient;
+
+          import androidx.activity.OnBackPressedCallback;
+          import androidx.appcompat.app.AppCompatActivity;
+
+          public class MainActivity extends AppCompatActivity {
+
+              private WebView webView;
+
+              @Override
+              protected void onCreate(Bundle savedInstanceState) {
+                  super.onCreate(savedInstanceState);
+                  setContentView(R.layout.activity_main);
+
+                  webView = findViewById(R.id.webView);
+
+                  WebSettings settings = webView.getSettings();
+                  settings.setJavaScriptEnabled(true);
+                  settings.setDomStorageEnabled(true);
+                  settings.setDatabaseEnabled(true);
+
+                  CookieManager.getInstance().setAcceptCookie(true);
+
+                  webView.setWebViewClient(new WebViewClient());
+
+                  webView.loadUrl(
+                      "https://krishnajkpb.github.io/learn-to-earth-website/"
+                  );
+
+                  getOnBackPressedDispatcher().addCallback(this,
+                      new OnBackPressedCallback(true) {
+                          @Override
+                          public void handleOnBackPressed() {
+                              if (webView.canGoBack()) {
+                                  webView.goBack();
+                              } else {
+                                  finish();
+                              }
+                          }
+                      });
+              }
+          }
+          EOF
+
+      - name: Install Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install SDK packages
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+
+      - name: Build APK
+        run: |
+          gradle wrapper --gradle-version 8.10.2
+          ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: LearnToEarth-APK
+          path: app/build/outputs/apk/debug/app-debug.apk
