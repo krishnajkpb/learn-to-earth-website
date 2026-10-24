@@ -1,5 +1,327 @@
+```html
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Watch - Learn to Earth</title><link rel="stylesheet" href="style.css"></head>
-<body><header class="topbar"><div class="brand"><span class="logo">L</span> Learn to Earth</div><nav><a href="dashboard.html">← Library</a></nav></header>
-<main class="content watch-page"><h1 id="watchTitle">Lesson</h1><div class="video-shell" id="videoShell"><video id="player" controls controlsList="nodownload noplaybackrate" disablePictureInPicture oncontextmenu="return false;" playsinline></video></div><p class="muted" id="watchFolder"></p><div id="videoHelp" class="notice hidden"></div></main>
-<script type="module" src="script.js"></script></body></html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#087cf0">
+<meta name="description" content="Watch lessons on Learn to Earn.">
+<title>Watch Lesson - Learn to Earn</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+:root {
+  --blue: #087cf0;
+  --dark: #15345c;
+  --muted: #71819a;
+  --border: #dce9fa;
+}
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  color: var(--dark);
+  background: linear-gradient(180deg,#edf5ff,#f8fbff 55%,#fff);
+}
+
+.topbar {
+  min-height: 76px;
+  padding: 12px max(5%,calc((100% - 1240px)/2));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: rgba(255,255,255,.96);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -.5px;
+}
+
+.brand img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 13px;
+}
+
+.topbar nav a {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: #e8f3ff;
+  color: #086ee4;
+  font-weight: 750;
+  text-decoration: none;
+  transition: .2s;
+}
+
+.topbar nav a:hover {
+  color: white;
+  background: var(--blue);
+}
+
+.watch-page {
+  max-width: 1120px;
+  margin: 35px auto 50px;
+  padding: 0 22px;
+}
+
+.watch-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.watch-tag {
+  display: inline-block;
+  padding: 8px 13px;
+  border-radius: 999px;
+  background: #dceeff;
+  color: #086ee4;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+#watchTitle {
+  margin: 12px 0 7px;
+  font-size: clamp(26px,4vw,39px);
+  letter-spacing: -1px;
+  overflow-wrap: anywhere;
+}
+
+#watchFolder {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.video-card {
+  padding: 12px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 25px;
+  box-shadow: 0 18px 50px #183d680f;
+}
+
+.video-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px 15px;
+  font-weight: 800;
+}
+
+.video-brand img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 9px;
+}
+
+.video-brand span {
+  font-size: 14px;
+}
+
+.video-shell {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 17px;
+  background: #101827;
+  display: grid;
+  place-items: center;
+}
+
+#player {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: #101827;
+}
+
+.player-watermark {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 48px;
+  height: 48px;
+  padding: 5px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.92);
+  object-fit: contain;
+  pointer-events: none;
+  opacity: .88;
+  z-index: 2;
+}
+
+.player-caption {
+  margin: 16px 7px 5px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.notice {
+  margin-top: 18px;
+  padding: 15px 17px;
+  border: 1px solid #cfe4ff;
+  border-radius: 14px;
+  background: #edf6ff;
+  color: #315579;
+  line-height: 1.65;
+}
+
+.hidden { display: none !important; }
+
+/* Advertisement area */
+.ad-section {
+  margin: 26px 0;
+  padding: 16px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: white;
+}
+
+.ad-label {
+  color: #91a3bc;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+.ad-content {
+  width: 320px;
+  max-width: 100%;
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ad-content iframe {
+  max-width: 100%;
+  border: 0;
+}
+
+footer {
+  padding: 25px 15px;
+  text-align: center;
+  background: #15385f;
+  color: #e1edff;
+  font-size: 13px;
+}
+
+@media(max-width:600px) {
+  .topbar { padding: 11px 15px; }
+  .brand { font-size: 17px; gap: 8px; }
+  .brand img { width: 38px; height: 38px; }
+  .topbar nav a { padding: 10px 12px; font-size: 13px; }
+  .watch-page { margin-top: 25px; padding: 0 13px; }
+  .video-card { padding: 7px; border-radius: 17px; }
+  .video-shell { border-radius: 12px; }
+  .player-watermark { width: 35px; height: 35px; top: 9px; left: 9px; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="brand" style="text-decoration:none;color:inherit">
+    <img src="logo.png" alt="Learn to Earn logo">
+    <span>Learn to Earn</span>
+  </a>
+
+  <nav>
+    <a href="dashboard.html">← Back to Library</a>
+  </nav>
+</header>
+
+<main class="content watch-page">
+
+  <div class="watch-heading">
+    <div>
+      <span class="watch-tag">YOUR LEARNING SPACE</span>
+      <h1 id="watchTitle">Loading lesson...</h1>
+      <p id="watchFolder">Get ready to learn something new.</p>
+    </div>
+  </div>
+
+  <section class="video-card">
+    <div class="video-brand">
+      <img src="logo.png" alt="Learn to Earn logo">
+      <span>Learn to Earn <span style="color:#087cf0">• Lesson Player</span></span>
+    </div>
+
+    <div class="video-shell" id="videoShell">
+      <video
+        id="player"
+        controls
+        controlsList="nodownload"
+        disablePictureInPicture
+        oncontextmenu="return false;"
+        playsinline
+        preload="metadata"
+        poster="logo.png">
+        Your browser does not support HTML video.
+      </video>
+
+      <img class="player-watermark" src="logo.png" alt="" aria-hidden="true">
+    </div>
+
+    <p class="player-caption">
+      Learn at your own pace. Use the video controls to pause, play, and adjust the volume.
+    </p>
+  </section>
+
+  <div id="videoHelp" class="notice hidden"></div>
+
+  <section class="ad-section" aria-label="Advertisement">
+    <span class="ad-label">ADVERTISEMENT</span>
+    <div class="ad-content">
+      <script>
+        atOptions = {
+          'key': '2ffef4e051a5de3fbc508d93fc25c894',
+          'format': 'iframe',
+          'height': 50,
+          'width': 320,
+          'params': {}
+        };
+      </script>
+      <script src="https://bicea.org/22/2/2ffef4e051a5de3fbc508d93fc25c894"></script>
+    </div>
+  </section>
+
+</main>
+
+<footer>© 2026 Learn to Earn · Keep learning, keep growing.</footer>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>
+```
