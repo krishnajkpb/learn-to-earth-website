@@ -1,459 +1,456 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#087cf0">
-<meta name="description" content="Explore lessons and study materials on Learn to Earn.">
-<title>Library - Learn to Earn</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#edf4ff">
+  <meta name="description" content="Explore video lessons and study materials on Learn to Earn.">
+  <title>Library - Learn to Earn</title>
+  <link rel="stylesheet" href="style.css">
 
-<style>
-:root {
-  --blue: #4778ed;
-  --blue-dark: #2457ce;
-  --ink: #172b4d;
-  --muted: #73829b;
-  --line: #e3ebf8;
-  --panel: #ffffff;
-  --bg: #f1f6ff;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  color: var(--ink);
-  font-family: Inter, Arial, sans-serif;
-  background: linear-gradient(135deg,#e9f1ff,#f8fbff 55%,#edf5ff);
-}
-a { color: inherit; text-decoration: none; }
-button { font: inherit; }
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  min-height: 76px;
-  padding: 12px max(5%,calc((100% - 1220px)/2));
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 18px;
-  background: rgba(255,255,255,.96);
-  border-bottom: 1px solid var(--line);
-  backdrop-filter: blur(12px);
-}
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 21px;
-  font-weight: 850;
-  letter-spacing: -.5px;
-}
-.logo {
-  display: block;
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
-  object-position: center;
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  flex-shrink: 0;
-}
-.topbar nav {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-.topbar nav a,
-.link-button {
-  padding: 11px 14px;
-  border: 0;
-  border-radius: 10px;
-  background: transparent;
-  color: #586a86;
-  font-size: 13px;
-  font-weight: 750;
-  cursor: pointer;
-}
-.topbar nav a:hover,
-.topbar nav a.active {
-  color: var(--blue-dark);
-  background: #edf3ff;
-}
-.topbar nav .progress-link {
-  color: var(--blue-dark);
-  background: #eaf1ff;
-}
-.link-button:hover { background: #fff0f0; color: #bd3535; }
+  <style>
+    :root {
+      --blue: #4778ed;
+      --dark: #172b4d;
+      --muted: #71819a;
+      --border: #e0e9f8;
+      --page: #f4f7fd;
+    }
 
-.page-shell {
-  width: min(1180px,calc(100% - 36px));
-  margin: 34px auto 55px;
-}
-.welcome-panel {
-  position: relative;
-  overflow: hidden;
-  padding: 34px;
-  border: 1px solid #dbe7ff;
-  border-radius: 25px;
-  background: linear-gradient(120deg,#fff 0%,#f7faff 60%,#e8f2ff 100%);
-  box-shadow: 0 18px 50px #315b9b0b;
-}
-.welcome-panel::after {
-  content: "";
-  position: absolute;
-  width: 230px;
-  height: 230px;
-  right: -60px;
-  top: -95px;
-  border-radius: 50%;
-  background: #cfe0ff70;
-  pointer-events: none;
-}
-.welcome-layout {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 24px;
-}
-.eyebrow {
-  display: inline-block;
-  padding: 8px 12px;
-  border-radius: 30px;
-  color: #3564d7;
-  background: #eaf1ff;
-  font-size: 10px;
-  font-weight: 850;
-  letter-spacing: 1px;
-}
-.welcome-panel h1 {
-  margin: 16px 0 9px;
-  font-size: clamp(30px,4vw,43px);
-  line-height: 1.12;
-  letter-spacing: -1.2px;
-}
-.welcome-panel p {
-  max-width: 620px;
-  margin: 0;
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.8;
-}
-.welcome-art {
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  width: 100px;
-  height: 100px;
-  border-radius: 28px;
-  color: #4778ed;
-  background: linear-gradient(145deg,#dce8ff,#eff5ff);
-  font-size: 43px;
-}
-.access-notice {
-  margin: 22px 0;
-  padding: 15px 18px;
-  border: 1px solid #d5e5ff;
-  border-radius: 14px;
-  background: #edf5ff;
-  color: #31578e;
-  line-height: 1.6;
-}
-#accessNotice:empty { display: none; }
+    * { box-sizing: border-box; }
 
-.section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 16px;
-  margin: 31px 0 17px;
-}
-.section-heading h2 {
-  margin: 0;
-  font-size: 22px;
-  letter-spacing: -.4px;
-}
-.section-heading p {
-  margin: 6px 0 0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.6;
-}
-.section-tag {
-  color: #7587a3;
-  font-size: 12px;
-  white-space: nowrap;
-}
-.folder-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 18px 0 28px;
-}
-.folder-tab {
-  padding: 11px 16px;
-  border: 1px solid #dce6f7;
-  border-radius: 11px;
-  background: white;
-  color: #536782;
-  font-size: 13px;
-  font-weight: 750;
-  cursor: pointer;
-  box-shadow: 0 3px 10px #193a6907;
-  transition: .2s;
-}
-.folder-tab:hover {
-  transform: translateY(-2px);
-  border-color: #9cbaff;
-  color: var(--blue-dark);
-}
-.folder-tab.active {
-  border-color: var(--blue);
-  background: var(--blue);
-  color: white;
-  box-shadow: 0 7px 16px #4778ed30;
-}
-.library-grid {
-  display: grid;
-  grid-template-columns: repeat(3,minmax(0,1fr));
-  gap: 18px;
-  align-items: stretch;
-}
-.content-card {
-  overflow: hidden;
-  min-width: 0;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: white;
-  box-shadow: 0 8px 25px #1739630a;
-  transition: transform .2s,box-shadow .2s;
-}
-.content-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 32px #17396314;
-}
-.thumb {
-  min-height: 115px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg,#e6eeff,#dceaff);
-  color: #4778ed;
-  font-size: 37px;
-}
-.card-body { padding: 19px; }
-.card-body h3 {
-  margin: 0 0 8px;
-  color: var(--ink);
-  font-size: 16px;
-  line-height: 1.45;
-}
-.card-body p {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.7;
-}
-.card-body .button,
-.content-card .button {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 39px;
-  padding: 10px 14px;
-  border: 0;
-  border-radius: 10px;
-  background: var(--blue);
-  color: white;
-  font-size: 12px;
-  font-weight: 800;
-  cursor: pointer;
-}
-.card-body .button:hover,
-.content-card .button:hover { background: var(--blue-dark); }
+    body {
+      margin: 0;
+      color: var(--dark);
+      font-family: Inter, Arial, sans-serif;
+      background: var(--page);
+    }
 
-/* Progress panel */
-.progress-panel {
-  margin-top: 30px;
-  padding: 25px;
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  background: white;
-  box-shadow: 0 8px 25px #17396308;
-}
-.progress-panel h2 { margin: 0 0 8px; font-size: 21px; }
-.progress-panel > p { color: var(--muted); font-size: 13px; line-height: 1.7; }
-.progress-stats {
-  display: grid;
-  grid-template-columns: repeat(3,minmax(0,1fr));
-  gap: 14px;
-  margin-top: 20px;
-}
-.stat-card {
-  padding: 18px;
-  border: 1px solid #e3ebf8;
-  border-radius: 14px;
-  background: #f8faff;
-}
-.stat-card span {
-  display: block;
-  color: var(--muted);
-  font-size: 12px;
-}
-.stat-card strong {
-  display: block;
-  margin-top: 9px;
-  color: #315fd0;
-  font-size: 25px;
-}
-.progress-disclaimer {
-  margin-top: 16px;
-  color: #8492a7;
-  font-size: 12px;
-  line-height: 1.7;
-}
-.hidden { display: none !important; }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
 
-/* Advertisement */
-.ad-section {
-  max-width: 100%;
-  min-height: 90px;
-  margin: 30px 0;
-  padding: 14px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: #f8faff;
-}
-.ad-label {
-  color: #8a9bb5;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1.3px;
-  text-transform: uppercase;
-}
-.ad-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 320px;
-  max-width: 100%;
-  min-height: 50px;
-  overflow: hidden;
-}
-.ad-content iframe { max-width: 100%; border: 0; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      min-height: 72px;
+      padding: 12px max(5%, calc((100% - 1180px)/2));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      background: rgba(255,255,255,.95);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
 
-footer {
-  padding: 27px 18px;
-  text-align: center;
-  color: #d4e5fa;
-  background: #15385f;
-  font-size: 13px;
-}
-@media(max-width:850px) {
-  .library-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
-  .topbar { padding: 12px 18px; }
-  .brand { font-size: 18px; }
-  .topbar nav { gap: 2px; }
-  .topbar nav a,.link-button { padding: 10px 9px; }
-}
-@media(max-width:560px) {
-  .topbar { align-items: flex-start; flex-wrap: wrap; }
-  .brand { font-size: 17px; }
-  .logo { width: 40px; height: 40px; }
-  .topbar nav { width: 100%; justify-content: space-between; }
-  .topbar nav a,.link-button { font-size: 12px; }
-  .page-shell { width: calc(100% - 24px); margin-top: 18px; }
-  .welcome-panel { padding: 22px; border-radius: 20px; }
-  .welcome-panel h1 { font-size: 30px; }
-  .welcome-panel p { font-size: 13px; }
-  .welcome-art { width: 57px; height: 57px; border-radius: 17px; font-size: 26px; }
-  .library-grid { grid-template-columns: 1fr; gap: 14px; }
-  .thumb { min-height: 90px; }
-  .section-heading h2 { font-size: 19px; }
-  .progress-panel { padding: 19px; }
-  .progress-stats { grid-template-columns: 1fr; }
-}
-</style>
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 21px;
+      font-weight: 850;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      color: white;
+      background: linear-gradient(135deg,#12b89a,#4778ed);
+      box-shadow: 0 7px 18px #4778ed30;
+    }
+
+    .topbar nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .topbar nav a:hover { color: var(--blue); }
+
+    .link-button {
+      border: 0;
+      background: transparent;
+      color: #526681;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .link-button:hover { color: #e04b5a; }
+
+    .page {
+      width: min(1180px, 92%);
+      margin: 30px auto 45px;
+    }
+
+    .hero {
+      padding: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+      border: 1px solid #dce8ff;
+      border-radius: 25px;
+      background: linear-gradient(120deg,#e5efff,#fff 65%,#e4fff7);
+      box-shadow: 0 12px 34px #254a7b0a;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: #3568d8;
+      background: #dceaff;
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      margin: 15px 0 9px;
+      font-size: clamp(28px,4vw,42px);
+      letter-spacing: -1.2px;
+    }
+
+    .hero p {
+      max-width: 610px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .hero-icon {
+      flex-shrink: 0;
+      width: 95px;
+      height: 95px;
+      display: grid;
+      place-items: center;
+      border-radius: 28px;
+      color: #4778ed;
+      background: linear-gradient(135deg,#d7e7ff,#d8fff5);
+      font-size: 46px;
+    }
+
+    #accessNotice:empty { display: none; }
+
+    #accessNotice {
+      margin: 20px 0;
+      padding: 15px 18px;
+      border: 1px solid #d6e7ff;
+      border-radius: 15px;
+      background: #eaf3ff;
+      color: #244d87;
+      line-height: 1.6;
+    }
+
+    .section-heading {
+      margin: 32px 0 17px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 15px;
+    }
+
+    .section-heading h2 {
+      margin: 0 0 6px;
+      font-size: 23px;
+      letter-spacing: -.4px;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .search-wrap {
+      width: min(300px, 100%);
+      position: relative;
+    }
+
+    .search-wrap span {
+      position: absolute;
+      top: 50%;
+      left: 13px;
+      transform: translateY(-50%);
+      color: #8092ad;
+    }
+
+    #subjectSearch {
+      width: 100%;
+      min-height: 44px;
+      padding: 11px 14px 11px 38px;
+      border: 1px solid #dce6f5;
+      border-radius: 13px;
+      outline: none;
+      background: white;
+      color: var(--dark);
+    }
+
+    #subjectSearch:focus {
+      border-color: #7da6ff;
+      box-shadow: 0 0 0 3px #4778ed18;
+    }
+
+    .folder-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 24px;
+    }
+
+    .folder-tab {
+      padding: 10px 16px;
+      border: 1px solid #dce6f5;
+      border-radius: 999px;
+      background: white;
+      color: #526681;
+      font-size: 12px;
+      font-weight: 750;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .folder-tab:hover,
+    .folder-tab.active {
+      color: white;
+      border-color: var(--blue);
+      background: var(--blue);
+      box-shadow: 0 6px 16px #4778ed28;
+    }
+
+    .library-grid {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .content-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: white;
+      box-shadow: 0 8px 24px #2043780b;
+      transition: transform .22s, box-shadow .22s;
+    }
+
+    .content-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 35px #20437818;
+      border-color: #c6d9ff;
+    }
+
+    .thumb {
+      min-height: 115px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px;
+      color: #315fd0;
+      background: linear-gradient(135deg,#e5edff,#d9f6ff);
+      font-size: 37px;
+    }
+
+    .thumb-badge {
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: #315fd0;
+      background: #ffffffcc;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .card-body { padding: 20px; }
+
+    .card-body h3 {
+      margin: 0 0 8px;
+      color: var(--dark);
+      font-size: 17px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .card-body p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
+    }
+
+    .card-progress { margin: 17px 0; }
+
+    .card-progress-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .progress-percent {
+      color: #315fd0;
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .progress-track {
+      height: 8px;
+      overflow: hidden;
+      border-radius: 99px;
+      background: #eaf0fb;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg,#4778ed,#27b9d8);
+    }
+
+    .card-body .button,
+    .content-card .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 41px;
+      padding: 11px 16px;
+      border: 0;
+      border-radius: 11px;
+      background: linear-gradient(135deg,#4778ed,#315fd0);
+      color: white;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      padding: 35px 20px;
+      text-align: center;
+      border: 1px dashed #cbd9ed;
+      border-radius: 18px;
+      background: white;
+      color: var(--muted);
+    }
+
+    .ad-section {
+      min-height: 95px;
+      margin: 32px 0;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: #fff;
+    }
+
+    .ad-label {
+      color: #8aa1bf;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+
+    .ad-content {
+      width: 320px;
+      max-width: 100%;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .ad-content iframe {
+      max-width: 100%;
+      border: 0;
+    }
+
+    footer {
+      padding: 25px 15px;
+      text-align: center;
+      color: #d4e5fa;
+      background: #15385f;
+      font-size: 13px;
+    }
+
+    @media(max-width:850px) {
+      .library-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    }
+
+    @media(max-width:600px) {
+      .topbar { padding: 12px 15px; }
+      .brand { font-size: 17px; }
+      .logo { width: 36px; height: 36px; }
+      .topbar nav { gap: 12px; font-size: 12px; }
+      .page { width: 92%; margin-top: 20px; }
+      .hero { padding: 22px; }
+      .hero-icon { width: 58px; height: 58px; border-radius: 17px; font-size: 28px; }
+      .hero h1 { font-size: 29px; }
+      .section-heading { align-items: stretch; flex-direction: column; }
+      .search-wrap { width: 100%; }
+      .library-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 
 <body>
 <header class="topbar">
   <a class="brand" href="index.html">
-    <img class="logo" src="./logo.png" alt="Learn to Earn logo">
+    <span class="logo">L</span>
     <span>Learn to Earn</span>
   </a>
 
-  <nav aria-label="Main navigation">
+  <nav>
     <a href="index.html">Home</a>
-    <a href="dashboard.html" class="active">Library</a>
-    <a href="#progressSection" class="progress-link" id="progressNav">Progress</a>
-    <a href="#helpSection">Help</a>
+    <a href="dashboard.html">Library</a>
     <button id="logoutBtn" class="link-button" type="button">Logout</button>
   </nav>
 </header>
 
-<main class="page-shell">
-  <section class="welcome-panel">
-    <div class="welcome-layout">
-      <div>
-        <span class="eyebrow">YOUR LEARNING SPACE</span>
-        <h1>Discover your next lesson.</h1>
-        <p>Explore your learning folders, watch educational videos, and find study materials in one organized library.</p>
-      </div>
-      <div class="welcome-art" aria-hidden="true">▤</div>
+<main class="page">
+  <section class="hero">
+    <div>
+      <span class="eyebrow">YOUR LEARNING SPACE</span>
+      <h1>Discover your next <span style="color:#4778ed">big idea.</span></h1>
+      <p>Explore your learning folders, watch lessons, and find study materials in one place. Keep learning, one step at a time.</p>
     </div>
+    <div class="hero-icon" aria-hidden="true">🎓</div>
   </section>
 
-  <div id="accessNotice" class="access-notice"></div>
+  <div id="accessNotice" class="notice"></div>
 
-  <section aria-labelledby="coursesHeading">
-    <div class="section-heading">
-      <div>
-        <h2 id="coursesHeading">Discover Courses</h2>
-        <p>Choose a subject or folder to explore its learning resources.</p>
-      </div>
-      <span class="section-tag">Your library</span>
+  <section class="section-heading">
+    <div>
+      <h2>Explore your subjects</h2>
+      <p>Choose a folder and continue learning at your own pace.</p>
     </div>
-
-    <div id="folderTabs" class="folder-tabs"></div>
-
-    <section id="library" class="library-grid" aria-label="Learning resources"></section>
+    <label class="search-wrap">
+      <span>⌕</span>
+      <input id="subjectSearch" type="search" placeholder="Search subjects..." aria-label="Search subjects">
+    </label>
   </section>
 
-  <section id="progressSection" class="progress-panel">
-    <h2>Your Progress</h2>
-    <p>Keep track of your learning journey. Your library content remains connected to your existing account.</p>
+  <div id="folderTabs" class="folder-tabs"></div>
 
-    <div class="progress-stats">
-      <div class="stat-card">
-        <span>Available resources</span>
-        <strong id="progressResources">—</strong>
-      </div>
-      <div class="stat-card">
-        <span>Learning folders</span>
-        <strong id="progressFolders">—</strong>
-      </div>
-      <div class="stat-card">
-        <span>Learning status</span>
-        <strong id="progressStatus">Active</strong>
-      </div>
-    </div>
-
-    <p class="progress-disclaimer">These counts are estimates based on the resources currently displayed. They do not represent completed lessons unless completion tracking is implemented in your JavaScript.</p>
-  </section>
-
-  <section id="helpSection" class="progress-panel">
-    <h2>Need help?</h2>
-    <p>If a lesson or study material does not open, check that you are logged in and your account has been approved. Contact your site administrator if the problem continues.</p>
+  <section id="library" class="library-grid" aria-live="polite">
+    <div class="empty-state">Loading your library...</div>
   </section>
 
   <section class="ad-section" aria-label="Advertisement">
@@ -473,42 +470,66 @@ footer {
   </section>
 </main>
 
-<footer>© 2026 Learn to Earn. Keep learning, keep growing.</footer>
+<footer>© 2026 Learn to Earn · Keep learning, keep growing.</footer>
 
 <script type="module" src="script.js"></script>
 
 <script>
-/* Small UI-only progress display. This does not alter Firebase data. */
-document.addEventListener('DOMContentLoaded', function () {
+  // Search only hides cards; Firebase and lesson buttons remain managed by script.js.
+  const subjectSearch = document.getElementById('subjectSearch');
+  subjectSearch.addEventListener('input', () => {
+    const term = subjectSearch.value.trim().toLowerCase();
+    const cards = document.querySelectorAll('#library .content-card');
+
+    cards.forEach(card => {
+      card.style.display = card.textContent.toLowerCase().includes(term) ? '' : 'none';
+    });
+
+    let empty = document.getElementById('searchEmpty');
+    const visibleCards = [...cards].some(card => card.style.display !== 'none');
+
+    if (!visibleCards && cards.length > 0) {
+      if (!empty) {
+        empty = document.createElement('div');
+        empty.id = 'searchEmpty';
+        empty.className = 'empty-state';
+        empty.textContent = 'No subjects match your search. Try another word.';
+        document.getElementById('library').appendChild(empty);
+      }
+      empty.style.display = '';
+    } else if (empty) {
+      empty.style.display = 'none';
+    }
+  });
+
+  // Add a percentage indicator to each card for visual demonstration.
+  // These are examples, not saved learner progress.
+  function addDemoProgress() {
+    document.querySelectorAll('#library .content-card').forEach((card, index) => {
+      if (card.querySelector('.card-progress')) return;
+
+      const percent = [25, 40, 60, 75, 90, 15][index % 6];
+      const body = card.querySelector('.card-body');
+      if (!body) return;
+
+      const progress = document.createElement('div');
+      progress.className = 'card-progress';
+      progress.innerHTML = `
+        <div class="card-progress-top">
+          <span>Sample progress</span>
+          <span class="progress-percent">${percent}%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width:${percent}%"></div>
+        </div>`;
+      body.appendChild(progress);
+    });
+  }
+
   const library = document.getElementById('library');
-  const folderTabs = document.getElementById('folderTabs');
-  const resourcesOutput = document.getElementById('progressResources');
-  const foldersOutput = document.getElementById('progressFolders');
-
-  function updateProgressCounts() {
-    if (library && resourcesOutput) {
-      resourcesOutput.textContent = library.querySelectorAll('.content-card').length;
-    }
-    if (folderTabs && foldersOutput) {
-      foldersOutput.textContent = folderTabs.querySelectorAll('button, .folder-tab').length;
-    }
-  }
-
-  updateProgressCounts();
-
-  if (library) {
-    new MutationObserver(updateProgressCounts).observe(library, {
-      childList: true,
-      subtree: true
-    });
-  }
-  if (folderTabs) {
-    new MutationObserver(updateProgressCounts).observe(folderTabs, {
-      childList: true,
-      subtree: true
-    });
-  }
-});
+  new MutationObserver(addDemoProgress).observe(library, { childList: true, subtree: true });
+  addDemoProgress();
 </script>
 </body>
 </html>
+```
