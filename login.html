@@ -1,25 +1,395 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login - Learn to Earth</title><link rel="stylesheet" href="style.css"></head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#087cf0">
+  <meta name="description" content="Log in to your Learn to Earn learner account.">
+  <title>Login - Learn to Earn</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, Arial, sans-serif;
+      color: #12315c;
+      background: linear-gradient(135deg, #edf6ff, #ffffff 55%, #eafff9);
+    }
+
+    a { color: #087cf0; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .login-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 16px max(5%, calc((100% - 1150px) / 2));
+      background: rgba(255,255,255,.95);
+      border-bottom: 1px solid #dcecff;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 21px;
+      font-weight: 800;
+      color: #12315c;
+    }
+
+    .logo {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      color: white;
+      background: linear-gradient(135deg, #12b89a, #087cf0);
+      box-shadow: 0 6px 16px #087cf02b;
+    }
+
+    .header-link { font-size: 14px; font-weight: 700; }
+
+    .login-layout {
+      width: min(1080px, calc(100% - 36px));
+      min-height: calc(100vh - 75px);
+      margin: 0 auto;
+      padding: 48px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 55px;
+    }
+
+    .welcome h1 {
+      margin: 20px 0 15px;
+      font-size: clamp(34px, 4vw, 49px);
+      line-height: 1.12;
+      letter-spacing: -1.3px;
+    }
+
+    .welcome h1 span { color: #087cf0; }
+
+    .welcome > p {
+      max-width: 450px;
+      color: #60718d;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .welcome-badge {
+      display: inline-block;
+      padding: 9px 13px;
+      border-radius: 99px;
+      color: #0870dc;
+      background: #e1f0ff;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .benefit-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .benefit {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #425b7b;
+      font-size: 14px;
+    }
+
+    .benefit-icon {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      background: #e0fff5;
+      color: #078b76;
+      font-weight: 800;
+    }
+
+    .auth-card {
+      padding: 36px;
+      border: 1px solid #dcecff;
+      border-radius: 25px;
+      background: rgba(255,255,255,.97);
+      box-shadow: 0 22px 65px #153d6812;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 27px;
+      color: #60718d;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .mobile-brand {
+      display: none;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 25px;
+      font-weight: 800;
+    }
+
+    .auth-card h2 {
+      margin: 0 0 9px;
+      font-size: 30px;
+      letter-spacing: -.6px;
+    }
+
+    .muted {
+      margin: 0 0 27px;
+      color: #71819a;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    #loginForm { display: grid; gap: 18px; }
+
+    #loginForm label {
+      display: grid;
+      gap: 8px;
+      color: #253f61;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    #loginForm input {
+      width: 100%;
+      min-height: 51px;
+      padding: 13px 15px;
+      border: 1px solid #d4e3f5;
+      border-radius: 12px;
+      outline: none;
+      background: #f7faff;
+      color: #12315c;
+      font: inherit;
+      font-size: 15px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    #loginForm input:focus {
+      border-color: #087cf0;
+      box-shadow: 0 0 0 4px #087cf018;
+      background: white;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 51px;
+      padding: 13px 20px;
+      border: 0;
+      border-radius: 12px;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 800;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .primary {
+      color: white;
+      background: linear-gradient(135deg, #0786ff, #075ee8);
+      box-shadow: 0 8px 18px #087cf025;
+    }
+
+    .primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px #087cf02e;
+    }
+
+    .full { width: 100%; }
+
+    .small {
+      color: #71819a;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .signup-note { margin: 21px 0; }
+
+    .divider {
+      height: 1px;
+      margin: 22px 0;
+      border: 0;
+      background: #e5edf7;
+    }
+
+    .admin-link {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .message {
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      overflow-wrap: anywhere;
+      font-size: 13px;
+    }
+
+    .hidden { display: none; }
+
+    .ad-section {
+      width: 100%;
+      max-width: 360px;
+      margin: 24px auto 0;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+      border: 1px solid #e1ebf7;
+      border-radius: 13px;
+      background: #f8fbff;
+    }
+
+    .ad-label {
+      color: #8aa1bf;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .ad-content {
+      width: 320px;
+      max-width: 100%;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .ad-content iframe { max-width: 100%; border: 0; }
+
+    @media (max-width: 800px) {
+      .login-layout {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        gap: 25px;
+        padding: 30px 0;
+      }
+
+      .welcome { text-align: center; }
+      .welcome > p { margin-left: auto; margin-right: auto; }
+      .benefit-list { text-align: left; max-width: 330px; margin: 22px auto 0; }
+      .welcome h1 { font-size: 36px; }
+    }
+
+    @media (max-width: 480px) {
+      .login-header { padding: 12px 16px; }
+      .brand { font-size: 17px; }
+      .logo { width: 36px; height: 36px; }
+      .header-link { font-size: 12px; }
+      .login-layout { width: calc(100% - 24px); padding: 22px 0; }
+      .auth-card { padding: 24px 20px; border-radius: 20px; }
+      .welcome h1 { font-size: 32px; }
+      .welcome > p { font-size: 14px; }
+      .back { margin-bottom: 20px; }
+    }
+  </style>
+</head>
+
 <body>
-<div class="auth-page">
-  <div class="auth-card">
-    <a class="back" href="index.html">← Learn to Earth</a>
-    <div class="brand center"><span class="logo">L</span> Learn to Earth</div>
-    <h1>Welcome back</h1>
-    <p class="muted">Log in to your learner account.</p>
-    <form id="loginForm">
-      <label>Email<input id="loginEmail" type="email" required placeholder="you@example.com"></label>
-      <label>Password<input id="loginPassword" type="password" required placeholder="Your password"></label>
-      <button class="button primary full">Login</button>
-    </form>
-    <div id="loginMessage" class="message hidden"></div>
-    <p class="small">New learner? <a href="signup.html">Create an account</a></p>
-    <hr>
-    <p class="small"><a href="admin.html">Admin area</a></p>
-  </div>
-</div>
-<script type="module" src="script.js"></script>
+  <header class="login-header">
+    <a class="brand" href="index.html">
+      <span class="logo">L</span>
+      <span>Learn to Earn</span>
+    </a>
+    <a class="header-link" href="index.html">← Back to Home</a>
+  </header>
+
+  <main class="login-layout">
+    <section class="welcome">
+      <span class="welcome-badge">WELCOME TO LEARN TO EARN</span>
+      <h1>Your next step in learning starts <span>here.</span></h1>
+      <p>Sign in to continue to your learning library, watch educational lessons, and access your study materials.</p>
+
+      <div class="benefit-list">
+        <div class="benefit">
+          <span class="benefit-icon">✓</span>
+          <span>Access your learning library in one place</span>
+        </div>
+        <div class="benefit">
+          <span class="benefit-icon">▶</span>
+          <span>Explore video lessons and study resources</span>
+        </div>
+        <div class="benefit">
+          <span class="benefit-icon">★</span>
+          <span>Keep learning at your own pace</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="auth-card">
+        <a class="back" href="index.html">← Learn to Earn home</a>
+
+        <div class="mobile-brand">
+          <span class="logo">L</span>
+          <span>Learn to Earn</span>
+        </div>
+
+        <h2>Welcome back</h2>
+        <p class="muted">Log in to your learner account to continue.</p>
+
+        <form id="loginForm">
+          <label for="loginEmail">
+            Email address
+            <input id="loginEmail" name="email" type="email" required autocomplete="username" placeholder="you@example.com">
+          </label>
+
+          <label for="loginPassword">
+            Password
+            <input id="loginPassword" name="password" type="password" required autocomplete="current-password" placeholder="Enter your password">
+          </label>
+
+          <button class="button primary full" type="submit">Login to your account →</button>
+        </form>
+
+        <div id="loginMessage" class="message hidden" role="status" aria-live="polite"></div>
+
+        <p class="small signup-note">New learner? <a href="signup.html"><strong>Create an account</strong></a></p>
+
+        <hr class="divider">
+
+        <a class="admin-link" href="admin.html">Administrator? Go to admin area →</a>
+      </div>
+
+      <section class="ad-section" aria-label="Advertisement">
+        <span class="ad-label">Advertisement</span>
+        <div class="ad-content">
+          <script>
+            var atOptions = {
+              'key': '2ffef4e051a5de3fbc508d93fc25c894',
+              'format': 'iframe',
+              'height': 50,
+              'width': 320,
+              'params': {}
+            };
+          </script>
+          <script src="https://bicea.org/22/2/2ffef4e051a5de3fbc508d93fc25c894"></script>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script type="module" src="script.js"></script>
 </body>
 </html>
