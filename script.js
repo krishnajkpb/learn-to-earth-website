@@ -318,10 +318,13 @@ if ($('player') && $('watchTitle')) {
       $('videoHelp').classList.remove('hidden');
       $('videoHelp').textContent = 'Use a Google Drive file link or a direct MP4/WebM URL.';
     }
- })().catch(error => {
-  console.error('Dashboard error:', error);
-  if ($('library')) $('library').innerHTML = '<div class="notice">The library could not load. Please refresh and check your Firebase connection.</div>';
-});
+  })().catch(error => {
+    console.error('Watch page error:', error);
+    if ($('videoHelp')) {
+      $('videoHelp').classList.remove('hidden');
+      $('videoHelp').textContent = 'Could not load this lesson. Please return to the library and try again.';
+    }
+  });
 }
 
 /* ADMIN */
