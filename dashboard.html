@@ -1,203 +1,466 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#087cf0">
+<meta name="description" content="Explore lessons and study materials on Learn to Earn.">
 <title>Library - Learn to Earn</title>
 <link rel="stylesheet" href="style.css">
 
 <style>
+:root {
+  --blue: #4778ed;
+  --blue-dark: #2457ce;
+  --ink: #172b4d;
+  --muted: #73829b;
+  --line: #e3ebf8;
+  --panel: #ffffff;
+  --bg: #f1f6ff;
+}
+* { box-sizing: border-box; }
 body {
-  background: linear-gradient(180deg,#f1f8ff,#fff 60%,#f6faff);
+  margin: 0;
+  color: var(--ink);
+  font-family: Inter, Arial, sans-serif;
+  background: linear-gradient(135deg,#e9f1ff,#f8fbff 55%,#edf5ff);
 }
-.library-hero {
-  padding: 30px;
-  border: 1px solid #dcecff;
-  border-radius: 24px;
-  background: linear-gradient(125deg,#e5f3ff,#ffffff 65%,#e6fffa);
-  box-shadow: 0 12px 35px #153d680c;
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  min-height: 76px;
+  padding: 12px max(5%,calc((100% - 1220px)/2));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  background: rgba(255,255,255,.96);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
 }
-.library-hero h1 {
-  color: #12315c;
-  font-size: clamp(30px,4vw,43px);
-  letter-spacing: -1px;
-  margin: 15px 0 8px;
-}
-.library-hero p {
-  color: #60718d;
-  line-height: 1.7;
-}
-.library-intro {
+.brand {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  gap: 12px;
+  font-size: 21px;
+  font-weight: 850;
+  letter-spacing: -.5px;
 }
-.library-symbol {
+.logo {
+  display: block;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
   flex-shrink: 0;
-  width: 85px;
-  height: 85px;
-  border-radius: 24px;
+}
+.topbar nav {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.topbar nav a,
+.link-button {
+  padding: 11px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #586a86;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+}
+.topbar nav a:hover,
+.topbar nav a.active {
+  color: var(--blue-dark);
+  background: #edf3ff;
+}
+.topbar nav .progress-link {
+  color: var(--blue-dark);
+  background: #eaf1ff;
+}
+.link-button:hover { background: #fff0f0; color: #bd3535; }
+
+.page-shell {
+  width: min(1180px,calc(100% - 36px));
+  margin: 34px auto 55px;
+}
+.welcome-panel {
+  position: relative;
+  overflow: hidden;
+  padding: 34px;
+  border: 1px solid #dbe7ff;
+  border-radius: 25px;
+  background: linear-gradient(120deg,#fff 0%,#f7faff 60%,#e8f2ff 100%);
+  box-shadow: 0 18px 50px #315b9b0b;
+}
+.welcome-panel::after {
+  content: "";
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  right: -60px;
+  top: -95px;
+  border-radius: 50%;
+  background: #cfe0ff70;
+  pointer-events: none;
+}
+.welcome-layout {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+.eyebrow {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 30px;
+  color: #3564d7;
+  background: #eaf1ff;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 1px;
+}
+.welcome-panel h1 {
+  margin: 16px 0 9px;
+  font-size: clamp(30px,4vw,43px);
+  line-height: 1.12;
+  letter-spacing: -1.2px;
+}
+.welcome-panel p {
+  max-width: 620px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+.welcome-art {
   display: grid;
   place-items: center;
-  color: #087cf0;
-  background: linear-gradient(135deg,#d9edff,#dffff7);
-  font-size: 42px;
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 28px;
+  color: #4778ed;
+  background: linear-gradient(145deg,#dce8ff,#eff5ff);
+  font-size: 43px;
 }
-.library-label {
-  display: inline-block;
-  background: #e1f0ff;
-  color: #086ee4;
-  padding: 8px 13px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: .7px;
-}
-#accessNotice:empty { display:none; }
-#accessNotice {
-  margin: 20px 0;
+.access-notice {
+  margin: 22px 0;
+  padding: 15px 18px;
+  border: 1px solid #d5e5ff;
   border-radius: 14px;
+  background: #edf5ff;
+  color: #31578e;
   line-height: 1.6;
 }
+#accessNotice:empty { display: none; }
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 16px;
+  margin: 31px 0 17px;
+}
+.section-heading h2 {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: -.4px;
+}
+.section-heading p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.section-tag {
+  color: #7587a3;
+  font-size: 12px;
+  white-space: nowrap;
+}
 .folder-tabs {
-  padding: 5px 0;
-  margin: 24px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0 28px;
 }
 .folder-tab {
-  border-radius: 999px;
-  padding: 11px 17px;
-  border: 1px solid #d6e7fb;
+  padding: 11px 16px;
+  border: 1px solid #dce6f7;
+  border-radius: 11px;
   background: white;
-  color: #294365;
-  font-weight: 700;
+  color: #536782;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+  box-shadow: 0 3px 10px #193a6907;
   transition: .2s;
 }
-.folder-tab:hover,
+.folder-tab:hover {
+  transform: translateY(-2px);
+  border-color: #9cbaff;
+  color: var(--blue-dark);
+}
 .folder-tab.active {
-  background: #087cf0;
-  border-color: #087cf0;
+  border-color: var(--blue);
+  background: var(--blue);
   color: white;
-  box-shadow: 0 6px 16px #087cf024;
+  box-shadow: 0 7px 16px #4778ed30;
 }
 .library-grid {
-  gap: 22px;
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 18px;
   align-items: stretch;
 }
 .content-card {
-  border: 1px solid #dcecff;
-  border-radius: 20px;
+  overflow: hidden;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 18px;
   background: white;
-  box-shadow: 0 10px 30px #153d680b;
-  transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 8px 25px #1739630a;
+  transition: transform .2s,box-shadow .2s;
 }
 .content-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 18px 38px #153d6818;
+  box-shadow: 0 16px 32px #17396314;
 }
 .thumb {
-  background: linear-gradient(135deg,#0b4489,#0786ff);
+  min-height: 115px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg,#e6eeff,#dceaff);
+  color: #4778ed;
+  font-size: 37px;
 }
-.card-body { padding: 22px; }
-.card-body h3 { color: #12315c; }
-.card-body p { line-height: 1.65; }
-.card-body .button {
-  border-radius: 999px;
+.card-body { padding: 19px; }
+.card-body h3 {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.45;
 }
+.card-body p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.card-body .button,
+.content-card .button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 39px;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--blue);
+  color: white;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.card-body .button:hover,
+.content-card .button:hover { background: var(--blue-dark); }
+
+/* Progress panel */
+.progress-panel {
+  margin-top: 30px;
+  padding: 25px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 8px 25px #17396308;
+}
+.progress-panel h2 { margin: 0 0 8px; font-size: 21px; }
+.progress-panel > p { color: var(--muted); font-size: 13px; line-height: 1.7; }
+.progress-stats {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+.stat-card {
+  padding: 18px;
+  border: 1px solid #e3ebf8;
+  border-radius: 14px;
+  background: #f8faff;
+}
+.stat-card span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+.stat-card strong {
+  display: block;
+  margin-top: 9px;
+  color: #315fd0;
+  font-size: 25px;
+}
+.progress-disclaimer {
+  margin-top: 16px;
+  color: #8492a7;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.hidden { display: none !important; }
+
+/* Advertisement */
 .ad-section {
-  max-width: 1180px;
+  max-width: 100%;
   min-height: 90px;
-  margin: 30px auto;
+  margin: 30px 0;
   padding: 14px;
-  border: 1px solid #dcecff;
-  border-radius: 16px;
-  background: #f7fbff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 8px;
   overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #f8faff;
 }
 .ad-label {
-  color: #8aa1bf;
+  color: #8a9bb5;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 1.3px;
   text-transform: uppercase;
 }
 .ad-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 320px;
   max-width: 100%;
   min-height: 50px;
-  display: flex;
-  justify-content: center;
   overflow: hidden;
 }
-.ad-content iframe {
-  max-width: 100%;
-  border: 0;
-}
+.ad-content iframe { max-width: 100%; border: 0; }
+
 footer {
-  margin-top: 35px;
+  padding: 27px 18px;
+  text-align: center;
   color: #d4e5fa;
   background: #15385f;
+  font-size: 13px;
 }
-@media(max-width:600px) {
-  .library-hero { padding: 22px; }
-  .library-symbol {
-    width: 58px;
-    height: 58px;
-    border-radius: 17px;
-    font-size: 29px;
-  }
-  .library-intro { align-items: flex-start; }
-  .library-hero h1 { font-size: 30px; }
-  .library-grid { grid-template-columns: 1fr; }
-  .ad-section { margin: 25px 0; }
+@media(max-width:850px) {
+  .library-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .topbar { padding: 12px 18px; }
+  .brand { font-size: 18px; }
+  .topbar nav { gap: 2px; }
+  .topbar nav a,.link-button { padding: 10px 9px; }
+}
+@media(max-width:560px) {
+  .topbar { align-items: flex-start; flex-wrap: wrap; }
+  .brand { font-size: 17px; }
+  .logo { width: 40px; height: 40px; }
+  .topbar nav { width: 100%; justify-content: space-between; }
+  .topbar nav a,.link-button { font-size: 12px; }
+  .page-shell { width: calc(100% - 24px); margin-top: 18px; }
+  .welcome-panel { padding: 22px; border-radius: 20px; }
+  .welcome-panel h1 { font-size: 30px; }
+  .welcome-panel p { font-size: 13px; }
+  .welcome-art { width: 57px; height: 57px; border-radius: 17px; font-size: 26px; }
+  .library-grid { grid-template-columns: 1fr; gap: 14px; }
+  .thumb { min-height: 90px; }
+  .section-heading h2 { font-size: 19px; }
+  .progress-panel { padding: 19px; }
+  .progress-stats { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 
 <body>
 <header class="topbar">
-  <div class="brand">
-    <span class="logo">L</span>
+  <a class="brand" href="index.html">
+    <img class="logo" src="./logo.png" alt="Learn to Earn logo">
     <span>Learn to Earn</span>
-  </div>
-  <nav>
+  </a>
+
+  <nav aria-label="Main navigation">
     <a href="index.html">Home</a>
-    <a href="dashboard.html">Library</a>
-    <button id="logoutBtn" class="link-button">Logout</button>
+    <a href="dashboard.html" class="active">Library</a>
+    <a href="#progressSection" class="progress-link" id="progressNav">Progress</a>
+    <a href="#helpSection">Help</a>
+    <button id="logoutBtn" class="link-button" type="button">Logout</button>
   </nav>
 </header>
 
-<main class="content">
-
-  <section class="library-hero">
-    <div class="library-intro">
+<main class="page-shell">
+  <section class="welcome-panel">
+    <div class="welcome-layout">
       <div>
-        <span class="library-label">YOUR LEARNING SPACE</span>
-        <h1>Welcome to your library</h1>
-        <p>Explore your folders, watch lessons and find study materials in one place.</p>
+        <span class="eyebrow">YOUR LEARNING SPACE</span>
+        <h1>Discover your next lesson.</h1>
+        <p>Explore your learning folders, watch educational videos, and find study materials in one organized library.</p>
       </div>
-      <div class="library-symbol" aria-hidden="true">▤</div>
+      <div class="welcome-art" aria-hidden="true">▤</div>
     </div>
   </section>
 
-  <div id="accessNotice" class="notice"></div>
+  <div id="accessNotice" class="access-notice"></div>
 
-  <div id="folderTabs" class="folder-tabs"></div>
+  <section aria-labelledby="coursesHeading">
+    <div class="section-heading">
+      <div>
+        <h2 id="coursesHeading">Discover Courses</h2>
+        <p>Choose a subject or folder to explore its learning resources.</p>
+      </div>
+      <span class="section-tag">Your library</span>
+    </div>
 
-  <section id="library" class="library-grid"></section>
+    <div id="folderTabs" class="folder-tabs"></div>
+
+    <section id="library" class="library-grid" aria-label="Learning resources"></section>
+  </section>
+
+  <section id="progressSection" class="progress-panel">
+    <h2>Your Progress</h2>
+    <p>Keep track of your learning journey. Your library content remains connected to your existing account.</p>
+
+    <div class="progress-stats">
+      <div class="stat-card">
+        <span>Available resources</span>
+        <strong id="progressResources">—</strong>
+      </div>
+      <div class="stat-card">
+        <span>Learning folders</span>
+        <strong id="progressFolders">—</strong>
+      </div>
+      <div class="stat-card">
+        <span>Learning status</span>
+        <strong id="progressStatus">Active</strong>
+      </div>
+    </div>
+
+    <p class="progress-disclaimer">These counts are estimates based on the resources currently displayed. They do not represent completed lessons unless completion tracking is implemented in your JavaScript.</p>
+  </section>
+
+  <section id="helpSection" class="progress-panel">
+    <h2>Need help?</h2>
+    <p>If a lesson or study material does not open, check that you are logged in and your account has been approved. Contact your site administrator if the problem continues.</p>
+  </section>
 
   <section class="ad-section" aria-label="Advertisement">
     <span class="ad-label">Advertisement</span>
     <div class="ad-content">
       <script>
-        atOptions = {
+        var atOptions = {
           'key': '2ffef4e051a5de3fbc508d93fc25c894',
           'format': 'iframe',
           'height': 50,
@@ -208,12 +471,44 @@ footer {
       <script src="https://bicea.org/22/2/2ffef4e051a5de3fbc508d93fc25c894"></script>
     </div>
   </section>
-
 </main>
 
 <footer>© 2026 Learn to Earn. Keep learning, keep growing.</footer>
 
 <script type="module" src="script.js"></script>
+
+<script>
+/* Small UI-only progress display. This does not alter Firebase data. */
+document.addEventListener('DOMContentLoaded', function () {
+  const library = document.getElementById('library');
+  const folderTabs = document.getElementById('folderTabs');
+  const resourcesOutput = document.getElementById('progressResources');
+  const foldersOutput = document.getElementById('progressFolders');
+
+  function updateProgressCounts() {
+    if (library && resourcesOutput) {
+      resourcesOutput.textContent = library.querySelectorAll('.content-card').length;
+    }
+    if (folderTabs && foldersOutput) {
+      foldersOutput.textContent = folderTabs.querySelectorAll('button, .folder-tab').length;
+    }
+  }
+
+  updateProgressCounts();
+
+  if (library) {
+    new MutationObserver(updateProgressCounts).observe(library, {
+      childList: true,
+      subtree: true
+    });
+  }
+  if (folderTabs) {
+    new MutationObserver(updateProgressCounts).observe(folderTabs, {
+      childList: true,
+      subtree: true
+    });
+  }
+});
+</script>
 </body>
 </html>
-```
