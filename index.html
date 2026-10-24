@@ -1,14 +1,270 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Learn to Earth</title>
+<meta name="theme-color" content="#087cf0">
+<meta name="description" content="Learn to Earn - Your online learning library for educational videos and study materials.">
+<title>Learn to Earn</title>
 <link rel="stylesheet" href="style.css">
+
+<style>
+:root {
+  --blue: #087cf0;
+  --dark: #12315c;
+  --muted: #60718d;
+  --border: #dcecff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  color: var(--dark);
+  background: linear-gradient(180deg,#f2f8ff,#fff 65%,#f6faff);
+}
+a { text-decoration: none; color: inherit; }
+.topbar {
+  min-height: 76px;
+  padding: 12px max(5%,calc((100% - 1240px)/2));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  background: rgba(255,255,255,.96);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -.5px;
+}
+.logo {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 14px;
+  color: white;
+  background: linear-gradient(135deg,#12b89a,#087cf0);
+  box-shadow: 0 7px 18px #087cf033;
+}
+.topbar nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.topbar nav a:hover { color: var(--blue); }
+.nav-btn,.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 21px;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: .2s;
+}
+.nav-btn,.primary {
+  color: white;
+  background: linear-gradient(135deg,#0786ff,#075ee8);
+  box-shadow: 0 8px 18px #087cf024;
+}
+.nav-btn:hover,.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px #087cf02b;
+}
+.hero {
+  max-width: 1240px;
+  margin: 55px auto 45px;
+  padding: 0 28px;
+  display: grid;
+  grid-template-columns: 1.3fr .7fr;
+  gap: 50px;
+  align-items: center;
+}
+.pill {
+  display: inline-block;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: #e1f0ff;
+  color: #086ee4;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .6px;
+}
+.hero h1 {
+  margin: 20px 0;
+  font-size: clamp(38px,5vw,62px);
+  line-height: 1.08;
+  letter-spacing: -1.7px;
+}
+.hero h1 span { color: var(--blue); }
+.hero p {
+  max-width: 620px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.8;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin-top: 28px;
+}
+.secondary {
+  background: white;
+  border: 1px solid #b8d8ff;
+  color: #086ee4;
+}
+.hero-card {
+  min-height: 320px;
+  padding: 38px;
+  border: 1px solid #d8eaff;
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  background:
+    radial-gradient(circle at 90% 8%,#2ac7c2 0,transparent 35%),
+    linear-gradient(145deg,#0c3d78,#087cf0);
+  box-shadow: 0 22px 55px #0754b82b;
+}
+.play-circle {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: white;
+  color: var(--blue);
+  font-size: 27px;
+}
+.hero-card h3 { font-size: 27px; margin: 24px 0 5px; }
+.hero-card p { color: #e0efff; font-size: 15px; }
+.features {
+  max-width: 1240px;
+  margin: 30px auto 45px;
+  padding: 0 28px;
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 20px;
+}
+.feature {
+  padding: 25px;
+  border: 1px solid var(--border);
+  border-radius: 21px;
+  background: white;
+  box-shadow: 0 12px 34px #153d680b;
+  transition: transform .2s,box-shadow .2s;
+}
+.feature:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 38px #153d6818;
+}
+.feature .icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+  background: linear-gradient(135deg,#e2f2ff,#e4fff7);
+  color: var(--blue);
+  font-size: 23px;
+  font-weight: 800;
+}
+.feature h3 { margin: 17px 0 8px; }
+.feature p { color: var(--muted); line-height: 1.7; margin-bottom: 0; }
+
+/* Advertisement */
+.ad-section {
+  max-width: 1240px;
+  min-height: 92px;
+  margin: 25px auto 35px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #f7fbff;
+  overflow: hidden;
+}
+.ad-label {
+  color: #8aa1bf;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+.ad-content {
+  width: 320px;
+  max-width: 100%;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.ad-content iframe {
+  max-width: 100%;
+  border: 0;
+}
+footer {
+  margin-top: 30px;
+  padding: 27px 18px;
+  text-align: center;
+  color: #d4e5fa;
+  background: #15385f;
+  font-size: 14px;
+}
+@media(max-width:800px) {
+  .topbar { padding: 12px 16px; gap: 10px; }
+  .brand { font-size: 17px; gap: 8px; }
+  .logo { width: 36px; height: 36px; }
+  .topbar nav { gap: 10px; font-size: 12px; }
+  .nav-btn { padding: 10px 13px; }
+  .hero {
+    grid-template-columns: 1fr;
+    margin: 35px auto;
+    padding: 0 20px;
+    gap: 25px;
+  }
+  .hero h1 { font-size: clamp(36px,9vw,48px); }
+  .hero p { font-size: 16px; }
+  .hero-card { min-height: 250px; padding: 28px; }
+  .features {
+    grid-template-columns: 1fr;
+    padding: 0 20px;
+    gap: 14px;
+  }
+  .ad-section { margin: 22px 16px; }
+}
+@media(max-width:390px) {
+  .topbar nav { gap: 8px; }
+  .topbar nav a { font-size: 11px; }
+  .brand { font-size: 15px; }
+  .nav-btn { padding: 9px 10px; }
+}
+</style>
 </head>
+
 <body>
 <header class="topbar">
-  <div class="brand"><span class="logo">L</span> Learn to Earth</div>
+  <div class="brand">
+    <span class="logo">L</span>
+    <span>Learn to Earn</span>
+  </div>
   <nav>
     <a href="index.html">Home</a>
     <a href="dashboard.html">Library</a>
@@ -18,30 +274,62 @@
 </header>
 
 <main>
-<section class="hero">
-  <div class="hero-text">
-    <span class="pill">LEARN • EXPLORE • GROW</span>
-    <h1>Learning that takes you<br><span>beyond the classroom.</span></h1>
-    <p>Learn to Earth is a simple learning library where approved learners can watch educational videos and access study materials.</p>
-    <div class="hero-actions">
-      <a class="button primary" href="signup.html">Join Learn to Earth</a>
-      <a class="button secondary" href="dashboard.html">Explore Library</a>
+  <section class="hero">
+    <div class="hero-text">
+      <span class="pill">LEARN • EXPLORE • GROW</span>
+      <h1>Learning that takes you<br><span>beyond the classroom.</span></h1>
+      <p>Learn to Earn is your learning library where approved learners can watch educational videos and access study materials to build their knowledge.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="signup.html">Join Learn to Earn →</a>
+        <a class="button secondary" href="dashboard.html">⌕ Explore Library</a>
+      </div>
     </div>
-  </div>
-  <div class="hero-card">
-    <div class="play-circle">▶</div>
-    <h3>Learn at your pace</h3>
-    <p>Videos, notes and presentations in one place.</p>
-  </div>
-</section>
 
-<section class="features">
-  <div class="feature"><div class="icon">▶</div><h3>Video Lessons</h3><p>Watch lessons inside the Learn to Earth player.</p></div>
-  <div class="feature"><div class="icon">▣</div><h3>Study Materials</h3><p>Access PDFs, presentations and text resources.</p></div>
-  <div class="feature"><div class="icon">✓</div><h3>Approved Learning</h3><p>Join the library after your request is approved.</p></div>
-</section>
+    <div class="hero-card">
+      <div class="play-circle">▶</div>
+      <h3>Learn at your pace</h3>
+      <p>Videos, notes and study materials in one place.</p>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature">
+      <div class="icon">▶</div>
+      <h3>Video Lessons</h3>
+      <p>Watch educational lessons and learn at your own pace.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">▤</div>
+      <h3>Study Materials</h3>
+      <p>Explore organized PDFs, notes and other learning resources.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">✓</div>
+      <h3>Approved Learning</h3>
+      <p>Access the learning library after your account is approved.</p>
+    </div>
+  </section>
+
+  <section class="ad-section" aria-label="Advertisement">
+    <span class="ad-label">Advertisement</span>
+    <div class="ad-content">
+      <script>
+        atOptions = {
+          'key': '2ffef4e051a5de3fbc508d93fc25c894',
+          'format': 'iframe',
+          'height': 50,
+          'width': 320,
+          'params': {}
+        };
+      </script>
+      <script src="https://bicea.org/22/2/2ffef4e051a5de3fbc508d93fc25c894"></script>
+    </div>
+  </section>
 </main>
-<footer>© 2026 Learn to Earth</footer>
+
+<footer>© 2026 Learn to Earn. Keep learning, keep growing.</footer>
+
 <script type="module" src="script.js"></script>
 </body>
 </html>
+```
